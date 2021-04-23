@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,700;1,700&family=Nanum+Gothic:wght@400;700;800&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <!-- font awesom -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
+    <!-- reset.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <!-- 사용자 정의 css -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        body {
+            background-color: #00baed;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container h1 {
+            font-family: 'kanit', sans-serif;
+            font-size: 70px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .container .weather_tab {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 60px;
+            color: #008eb5;
+            border-radius: 25px;
+            border: solid 2px transparent;
+            background-clip: padding-box;
+            box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+            backdrop-filter: blur(30px);
+            display: flex;
+            align-items: center;
+        }
+
+        .container .weather_tab .icon {
+            font-size: 100px;
+            margin-right: 50px;
+        }
+
+        .container .weather_tab .text .location {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .container .weather_tab .text .temperature {
+            font-family: "Nanum Gothic", sans-serif;
+            font-size: 50px;
+            font-weight: 700;
+        }
+    </style>
+    <title>Weather App</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>How's the Weather</h1>
+        <section class="weather_tab">
+            <article class="icon"><i class="fas fa-sun"></i></article>
+            <section class="text">
+                <h2 class="location">Seoul</h2>
+                <article class="temperature"><span>15</span> ℃</article>
+            </section>
+        </section>
+    </div>
+</body>
+
+</html>
