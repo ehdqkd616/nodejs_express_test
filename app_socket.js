@@ -25,11 +25,13 @@ io.on('connection', (socket) => { //연결이 들어오면 실행되는 이벤�
 
         // io.emit으로 연결된 모든 소켓들에 신호를 보낼 수 있다.
         io.emit('message', msg);
-
-
-
-
     });
+
+    // socket.on('message', (msg, fn) => {
+    //     console.log('Message received: ' + msg);
+    //     fn("server_send_date");
+    // });
+
 });
 
 server.listen(3000, function () {

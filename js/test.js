@@ -139,3 +139,13 @@
 
 // console.log(alex); // -> {name: 'Alex', age: 25}
 // // console.log(changedAlex); // -> {name: 'Alex', age: 25}
+
+
+let array = [1, 2, 3, 4, 5];
+let array_copy = array;
+
+array_copy.pop();
+array = [];
+
+console.log(array);
+console.log(array_copy);
