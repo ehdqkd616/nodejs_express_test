@@ -17,8 +17,8 @@ crawling.login = async () => {
     // 새로운 페이지를 연다.
     const page = await browser.newPage();
 
-    const daou_id = "kyw";
-    const daou_pw = "dusdn616!";
+    const daou_id = "";
+    const daou_pw = "";
 
     // 페이지의 크기를 설정한다.
     await page.setViewport({
