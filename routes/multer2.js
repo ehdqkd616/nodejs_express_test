@@ -52,32 +52,19 @@ router.get('/', function (req, res, next) {
     res.render('multer');
 });
 
-let uploadProcess = upload.array('IMG_FILE');
 
 //파일이 여러개이므로 두번째 인자에 upload.array(name) 을 이용
 //혹시 파일이 한개인 경우는 upload.single(name)을 이용
-router.post('/test/save', function (req, res) {
-    // uploadProcess 처리 전까지는 body를 볼 수 없다.
-    console.log(req.body);
+router.post('/test/save', upload.array('IMG_FILE'), function (req, res) {
 
-    uploadProcess(req, res, function (err) {
-        // console.log(req.body);
-        // console.log(req.files);
+    console.log(upload);
 
-        var testSn = req.body.TEST_SN;
-        var qSnArr = req.body.Q_SN;
-        var imgFileArr = req.files; //파일 객체를 배열 형태로 리턴함.
+    var testSn = req.body.TEST_SN;
+    var qSnArr = req.body.Q_SN;
+    var imgFileArr = req.files; //파일 객체를 배열 형태로 리턴함.
+    //var imgFile = req.file; //파일이 1개인 경우(upload.single()을 이용한 경우)
 
-        console.log(`testSn : ${testSn}`);
-        console.log(`qSnArr : ${qSnArr}`);
-        console.log(`imgFileArr : ${JSON.stringify(imgFileArr)}`);
-
-        //var imgFile = req.file; //파일이 1개인 경우(upload.single()을 이용한 경우)
-
-        res.render('multer');
-    });
-
-
+    res.render('multer');
 
 });
 

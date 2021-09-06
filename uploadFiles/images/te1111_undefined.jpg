@@ -1,0 +1,68 @@
+﻿/*
+작성일 : 2020-12-29
+작성자 : kihak@emfo.co.kr
+시스템 : ONE_EMFO
+기  능 : ONE 관리자 사이트 고객 Attendance 변경
+------------------------------------------------------------------------------------------------------------------------------
+*/
+ALTER       PROCEDURE [dbo].[Proc_Admin_Company_Edit_Attendance] (
+	@Dept_ID			VARCHAR(20),
+
+	@Use_Title		NVARCHAR(100),
+	@Use_Price		DECIMAL(12, 2),
+	@Use_Cnt		INT,
+	@Use_Day		INT,
+
+    @SMS_Send			CHAR(1),
+	@LMS_Send			CHAR(1),
+	@MMS_Send			CHAR(1),
+
+	@SMS_Price			DECIMAL(12,2),
+	@LMS_Price		DECIMAL(12,2),
+	@MMS_Price		DECIMAL(12,2),
+
+	@Academy_Phone	NVARCHAR(20),
+
+	@RESULT				VARCHAR(100)	OUTPUT	/*-- 리턴값 */
+)
+AS
+
+SET NOCOUNT ON;
+	SET @RESULT = 'SUCCESS'
+
+    DECLARE @Dept_Code INT
+	SELECT @Dept_Code = Dept_Code FROM LINK_ATTENDANCE.Attendance_Corp.dbo.Tbl_Academy_Info WITH(NOLOCK)
+    	WHERE Academy_Code = UPPER(@Dept_ID)
+
+	UPDATE LINK_ATTENDANCE.Attendance_Corp.dbo.Tbl_Academy_Use_Price
+		SET Use_Title = @Use_Title,
+		Use_Price = @Use_Price,
+		Limit_Cnt = @Use_Cnt,
+		Use_Date = @Use_Day
+	WHERE Dept_Code = @Dept_Code AND Del_Flag = 'N' AND Price_Type = 1
+	IF @@error <> 0 BEGIN SET @RESULT = 'FAIL : Tbl_Academy_Use_Price Error' GOTO EXCEPTION	END;
+
+ 	UPDATE LINK_ATTENDANCE.Attendance_Corp.dbo.Tbl_Academy_Msg_Price
+		SET SMS_Price = @SMS_Price,
+		LMS_Price = @LMS_Price,
+		MMS_Price = @MMS_Price,
+        SMS_YN = @SMS_Send,
+        LMS_YN = @LMS_Send,
+        MMS_YN = @MMS_Send
+	WHERE Dept_Code = @Dept_Code
+
+	IF @@error <> 0 BEGIN SET @RESULT = 'FAIL : Tbl_Academy_Msg_Price Error' GOTO EXCEPTION	END;
+
+	UPDATE LINK_ATTENDANCE.Attendance_Corp.dbo.Tbl_Academy_Info_Sub
+		SET Academy_Phone = @Academy_Phone
+	WHERE Dept_Code = @Dept_Code
+
+	IF @@error <> 0 BEGIN SET @RESULT = 'FAIL : Tbl_Academy_Info_Sub Error' GOTO EXCEPTION	END;
+
+RETURN 1
+
+
+Exception:
+	BEGIN
+		RETURN 0
+	END
