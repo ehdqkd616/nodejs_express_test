@@ -141,11 +141,19 @@
 // // console.log(changedAlex); // -> {name: 'Alex', age: 25}
 
 
-let array = [1, 2, 3, 4, 5];
-let array_copy = array;
+// let array = [1, 2, 3, 4, 5];
+// let array_copy = array;
 
-array_copy.pop();
-array = [];
+// array_copy.pop();
+// array = [];
 
-console.log(array);
-console.log(array_copy);
+// console.log(array);
+// console.log(array_copy);
+
+
+// 기존 콘솔 출력 함수 백업
+const console_Log1 = Object.assign({}, console);
+
+console.log = function () {}
+
+console_Log1.log("console_Log.log()");
