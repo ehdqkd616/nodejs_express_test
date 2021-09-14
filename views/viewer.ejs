@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <div class="viewer_div">
+        <iframe id="viewer_iframe" seamless src="" sandbox="allow-same-origin allow-forms allow-scripts" width="320px"
+            height="480px"></iframe>
+    </div>
+</body>
+
+<script>
+    // iframe에서 router 라우터 호출
+    $("#viewer_iframe").attr("src", location.protocol + "//" + location.host + "/v/<%= Url %>");
+</script>
+
+</html>
