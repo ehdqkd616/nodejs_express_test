@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/jquery-3.4.1.min.js"></script>
+    <script src="/javascripts/jquery-ui-1.8.23.custom.min.js"></script>
+    <script src="/javascripts/util.js"></script>
+</head>
+
+<body onload="changeImage()">
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <h3>onload로 이미지 크기 출력</h3>
+
+    <hr>
+    <form action="/image/uploadfiles" method="post" enctype="multipart/form-data">
+        <!-- 파일명 : <input type="file" name="myfile" id="file"> -->
+        <!-- <button type="submit">제출하기</button> -->
+        <select id="sel" onchange="changeImage()">
+            <option value="/images/sample_image1.jpg">이미지1
+            <option value="/images/sample_image2.jpg">이미지2
+            <option value="/images/sample_image3.jpg">이미지3
+        </select>
+        <span id="mySpan">이미지 크기</span>
+    </form>
+    <p><img id="myImg" src="images/sample_image1.jpg" alt="." width="600" height="400"></p>
+
+    <hr>
+    <div>
+        <h3>Image Url</h3>
+        <span id="image_url"></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>base64 인코딩 (substring(0, 1000))</h3>
+        <div id="base64_div" style="width:600px; height:400px; word-break:break-all"></div>
+    </div>
+</body>
+
+<script>
+    function changeImage() {
+        var sel = document.getElementById("sel");
+        var img = document.getElementById("myImg");
+        var base64_div = $("#base64_div");
+        var image_url = $("#image_url");
+
+        img.onload = function () {
+            // 이미지 크기 출력
+            var mySpan = document.getElementById("mySpan");
+            mySpan.innerHTML = img.width + "x" + img.height;
+        }
+        var index = sel.selectedIndex; // 선택된 옵션 인덱스
+        img.src = sel.options[index].value; // <option>의 value 속성
+        // 이미지 로딩 시작, 완료 후 onload 리스너 호출
+
+        util.imageURLToBase64(img.getAttribute("src"))
+            .then(function (base64) {
+                base64_div.html(base64.substring(0, 1000));
+            });
+
+        image_url.html(img.getAttribute("src"));
+
+    }
+</script>
+
+</html>

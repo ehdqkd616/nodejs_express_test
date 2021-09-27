@@ -5,7 +5,8 @@
  */
 
 // var app = require('../app');
-var app = require('../app_router');
+// var app = require('../app_router');
+var app = require('../app_image');
 var debug = require('debug')('express:server');
 var http = require('http');
 
